@@ -1,19 +1,35 @@
 /* src/styles/clients.module.css */
 
-.slider {
-    display: flex;
-    align-items: center;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+.marquee {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  display: flex;
+}
+
+.marqueeGroup {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  min-width: 100%;
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
   }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Optional: Pause on hover */
+.marquee:hover .marqueeGroup {
+  animation-play-state: paused;
+}
   
-  .slider::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .slider {
-    -ms-overflow-style: none; /* IE 10+ */
-    scrollbar-width: none;    /* Firefox */
-  }
   

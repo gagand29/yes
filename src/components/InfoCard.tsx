@@ -18,6 +18,7 @@ export default function InfoCard({ title, image }: InfoCardProps) {
         width={300}
         height={200}
         className="mx-auto mb-4 object-cover rounded-md"
+        style={{ width: "auto", height: "auto" }}
       />
       <p className="font-semibold text-gray-800 mb-2">{title}</p>
       <button className="mt-2 px-4 py-2 text-sm bg-[#8A1D2F] text-white rounded hover:bg-[#a9253d] transition">
