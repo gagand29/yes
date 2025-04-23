@@ -60,9 +60,7 @@ export default function TrustPage() {
       {/* Hero Section */}
       <section className="bg-[#8A1D2F] text-white py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            YES Trust
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">YES Trust</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
             A 80-G Registered Trust
           </p>
@@ -82,16 +80,10 @@ export default function TrustPage() {
           <div className="md:w-64 flex-shrink-0">
             <nav className="space-y-2">
               <Link
-                href="#overview"
+                href="#blood-donation"
                 className="block w-full px-6 py-3 text-left text-white bg-[#8A1D2F] rounded-md font-medium"
               >
-                Overview
-              </Link>
-              <Link
-                href="#donations"
-                className="block w-full px-6 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-md font-medium"
-              >
-                Donations
+                Blood Donation
               </Link>
               <Link
                 href="#activities"
@@ -100,10 +92,10 @@ export default function TrustPage() {
                 Activities
               </Link>
               <Link
-                href="#blood-donation"
+                href="#donations"
                 className="block w-full px-6 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-md font-medium"
               >
-                Blood Donation
+                Donations
               </Link>
             </nav>
           </div>
@@ -111,100 +103,6 @@ export default function TrustPage() {
           {/* Main Content */}
           <div className="flex-1">
             <div className="prose max-w-none">
-              {/* Donation Information */}
-              <section id="donations" className="mb-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                  Donations to YES Trust
-                </h2>
-                <div className="bg-white rounded-lg shadow-sm p-6">
-                  <blockquote className="border-l-4 border-[#8A1D2F] pl-4 mb-6">
-                    <p className="text-lg text-gray-700">
-                      YES Trust is registered under section 80G of the Income
-                      Tax Act. All donations to YES Trust are eligible for 50%
-                      tax deduction under section 80G.
-                    </p>
-                  </blockquote>
-                  <p className="text-gray-600 mb-6">
-                    Your contribution helps us continue our mission of serving
-                    the community and creating positive impact through our
-                    various initiatives.
-                  </p>
-                  <div className="bg-gray-50 rounded p-4 text-center">
-                    <p className="text-xl text-gray-800 mb-2">
-                      We welcome donations from philanthropists.
-                    </p>
-                    <p className="text-gray-600">
-                      Your donation can be by Check/DD in the name of YES Trust.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              {/* Activities Section */}
-              <section id="activities" className="mb-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                  Activities of YES Trust
-                </h2>
-                <div className="space-y-4">
-                  {activities.map((activity) => (
-                    <div
-                      key={activity.id}
-                      className="bg-white rounded-lg shadow-sm overflow-hidden"
-                    >
-                      <button
-                        onClick={() =>
-                          setExpandedActivity(
-                            expandedActivity === activity.id
-                              ? null
-                              : activity.id
-                          )
-                        }
-                        className="w-full px-6 py-4 flex items-center justify-between text-left"
-                      >
-                        <div>
-                          <h3 className="text-xl font-semibold text-gray-900">
-                            {activity.title}
-                          </h3>
-                          <p className="text-sm text-gray-500">
-                            {activity.location}
-                          </p>
-                        </div>
-                        {expandedActivity === activity.id ? (
-                          <FaChevronUp className="w-5 h-5 text-gray-500" />
-                        ) : (
-                          <FaChevronDown className="w-5 h-5 text-gray-500" />
-                        )}
-                      </button>
-                      <AnimatePresence>
-                        {expandedActivity === activity.id && (
-                          <motion.div
-                            initial={{ height: 0 }}
-                            animate={{ height: "auto" }}
-                            exit={{ height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-6 pb-4">
-                              <div className="relative h-48 md:h-64 mb-4 rounded-lg overflow-hidden">
-                                <Image
-                                  src={activity.image}
-                                  alt={activity.title}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                              <p className="text-gray-600">
-                                {activity.description}
-                              </p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
               {/* Blood Donation Form */}
               <section id="blood-donation" className="mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">
@@ -390,6 +288,100 @@ export default function TrustPage() {
                       </p>
                     </div>
                   </form>
+                </div>
+              </section>
+
+              {/* Activities Section */}
+              <section id="activities" className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                  Activities of YES Trust
+                </h2>
+                <div className="space-y-4">
+                  {activities.map((activity) => (
+                    <div
+                      key={activity.id}
+                      className="bg-white rounded-lg shadow-sm overflow-hidden"
+                    >
+                      <button
+                        onClick={() =>
+                          setExpandedActivity(
+                            expandedActivity === activity.id
+                              ? null
+                              : activity.id
+                          )
+                        }
+                        className="w-full px-6 py-4 flex items-center justify-between text-left"
+                      >
+                        <div>
+                          <h3 className="text-xl font-semibold text-gray-900">
+                            {activity.title}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {activity.location}
+                          </p>
+                        </div>
+                        {expandedActivity === activity.id ? (
+                          <FaChevronUp className="w-5 h-5 text-gray-500" />
+                        ) : (
+                          <FaChevronDown className="w-5 h-5 text-gray-500" />
+                        )}
+                      </button>
+                      <AnimatePresence>
+                        {expandedActivity === activity.id && (
+                          <motion.div
+                            initial={{ height: 0 }}
+                            animate={{ height: "auto" }}
+                            exit={{ height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-6 pb-4">
+                              <div className="relative h-48 md:h-64 mb-4 rounded-lg overflow-hidden">
+                                <Image
+                                  src={activity.image}
+                                  alt={activity.title}
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+                              <p className="text-gray-600">
+                                {activity.description}
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Donation Information */}
+              <section id="donations" className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                  Donations to YES Trust
+                </h2>
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <blockquote className="border-l-4 border-[#8A1D2F] pl-4 mb-6">
+                    <p className="text-lg text-gray-700">
+                      YES Trust is registered under section 80G of the Income
+                      Tax Act. All donations to YES Trust are eligible for 50%
+                      tax deduction under section 80G.
+                    </p>
+                  </blockquote>
+                  <p className="text-gray-600 mb-6">
+                    Your contribution helps us continue our mission of serving
+                    the community and creating positive impact through our
+                    various initiatives.
+                  </p>
+                  <div className="bg-gray-50 rounded p-4 text-center">
+                    <p className="text-xl text-gray-800 mb-2">
+                      We welcome donations from philanthropists.
+                    </p>
+                    <p className="text-gray-600">
+                      Your donation can be by Check/DD in the name of YES Trust.
+                    </p>
+                  </div>
                 </div>
               </section>
             </div>
