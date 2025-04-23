@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 const footerLinks = [
   {
@@ -12,6 +13,7 @@ const footerLinks = [
       { label: "Services", href: "/services" },
       { label: "Contact", href: "/contact" },
       { label: "Careers", href: "/jobs" },
+      { label: "FAQs", href: "/faqs" },
     ],
   },
   {
@@ -32,6 +34,13 @@ const footerLinks = [
       { label: "Instagram", href: "https://instagram.com" },
     ],
   },
+];
+
+const companies = [
+  { href: "/companies/hardsoft", label: "YES HardSoft Solutions" },
+  { href: "/companies/trust", label: "YES Trust" },
+  { href: "/companies/auto", label: "YES Auto Needs" },
+  { href: "/companies/finance", label: "YES Finance" },
 ];
 
 export default function Footer() {
@@ -91,6 +100,7 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
+              className="lg:col-span-1"
             >
               <h4 className="text-lg font-semibold mb-4">{section.title}</h4>
               <ul className="space-y-2">
@@ -107,6 +117,58 @@ export default function Footer() {
               </ul>
             </motion.div>
           ))}
+
+          {/* Companies */}
+          <div className="lg:col-span-1">
+            <h3 className="text-white font-semibold mb-4">Our Companies</h3>
+            <ul className="space-y-2">
+              {companies.map((company) => (
+                <li key={company.href}>
+                  <Link
+                    href={company.href}
+                    className="text-gray-200 hover:text-white transition-colors"
+                  >
+                    {company.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start space-x-3">
+                <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
+                <span>
+                  3626 Silverside Road,
+                  <br />
+                  Wilmington, DE 19810
+                  <br />
+                  USA
+                </span>
+              </li>
+              <li>
+                <a
+                  href="tel:+16096320397"
+                  className="flex items-center space-x-3 hover:text-white transition-colors"
+                >
+                  <FaPhone />
+                  <span>(001)-609-632-0397</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:info@yesgroups.net"
+                  className="flex items-center space-x-3 hover:text-white transition-colors"
+                >
+                  <FaEnvelope />
+                  <span>info@yesgroups.net</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom Bar */}

@@ -10,7 +10,6 @@ const companies = [
   { name: "YES HardSoft Solutions Inc", href: "/companies/hardsoft" },
   { name: "YES Trust", href: "/companies/trust" },
   { name: "YES Auto Needs", href: "/companies/auto" },
-  { name: "YES Finance", href: "/companies/finance" },
 ];
 
 const navLinks = [
@@ -40,7 +39,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 md:top-10 left-0 right-0 z-50 bg-white shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
