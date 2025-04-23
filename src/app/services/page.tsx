@@ -1,21 +1,37 @@
 "use client";
 
 import CoreOfferings from "@/components/CoreOfferings";
+import BusinessCategories from "@/components/BusinessCategories";
+import { motion } from "framer-motion";
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
-      <section className="max-w-7xl mx-auto px-4 pt-12 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          All Our Services
-        </h1>
-        <p className="text-lg text-gray-600">
-          Explore the full range of what YES Groups offers.
-        </p>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-b from-gray-50 to-white pt-28 md:pt-32">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-[#8A1D2F] mb-6">
+              Our Services & Ventures
+            </h1>
+            <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
+              From technology solutions to community initiatives, discover how
+              we're making a difference across multiple sectors.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* 👇 Full 6 services will be shown because `previewOnly` is NOT passed */}
+      {/* Technical Services Section */}
       <CoreOfferings />
-    </main>
+
+      {/* Business Categories Section */}
+      <BusinessCategories />
+    </div>
   );
 }
