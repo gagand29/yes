@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mb-4;
+  }
+  h2 {
+    @apply text-3xl font-bold mb-3;
+  }
+  h3 {
+    @apply text-2xl font-bold mb-2;
+  }
+  a {
+    @apply text-[#8A1D2F] hover:text-[#6A152F] transition-colors;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#8A1D2F] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#6A152F] transition-colors;
+  }
+  .btn-secondary {
+    @apply border-2 border-[#8A1D2F] text-[#8A1D2F] px-6 py-3 rounded-md font-semibold hover:bg-[#8A1D2F] hover:text-white transition-colors;
+  }
+  .card {
+    @apply bg-white rounded-lg shadow-sm p-6;
+  }
+  .section {
+    @apply py-12 md:py-16;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} 
