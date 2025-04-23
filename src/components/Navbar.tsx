@@ -10,7 +10,6 @@ const companies = [
   { name: "YES HardSoft Solutions Inc", href: "/companies/hardsoft" },
   { name: "YES Trust", href: "/companies/trust" },
   { name: "YES Auto Needs", href: "/companies/auto" },
-  { name: "YES Finance", href: "/companies/finance" },
 ];
 
 const navLinks = [
@@ -40,145 +39,136 @@ export default function Navbar() {
   }, []);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="fixed w-full z-50 transition-all duration-300 bg-white shadow-lg"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-between items-center h-16 md:h-20">
-            {/* Logo */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="flex-shrink-0"
-            >
-              <Link
-                href="/"
-                className="flex items-center space-x-2 md:space-x-3"
-              >
-                <Image
-                  src="/home/logoR.png"
-                  alt="YES Groups Logo"
-                  width={40}
-                  height={40}
-                  className="rounded-full w-8 h-8 md:w-10 md:h-10"
-                />
-                <span className="font-bold text-lg md:text-xl text-[#8A1D2F] whitespace-nowrap">
-                  YES Groups
-                </span>
-              </Link>
-            </motion.div>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center h-16 md:h-20">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex-shrink-0"
+          >
+            <Link href="/" className="flex items-center space-x-2 md:space-x-3">
+              <Image
+                src="/home/logoR.png"
+                alt="YES Groups Logo"
+                width={40}
+                height={40}
+                className="rounded-full w-8 h-8 md:w-10 md:h-10"
+              />
+              <span className="font-bold text-lg md:text-xl text-[#8A1D2F] whitespace-nowrap">
+                YES Groups
+              </span>
+            </Link>
+          </motion.div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              {navLinks.map((link) => (
-                <div key={link.label} className="relative group">
-                  {link.dropdown ? (
-                    <button
-                      onMouseEnter={() => setActiveDropdown(link.label)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                      className={`px-3 py-2 text-base lg:text-lg font-bold tracking-wide transition-colors inline-flex items-center space-x-2 ${
-                        activeDropdown === link.label
-                          ? "text-[#8A1D2F]"
-                          : "text-gray-700 hover:text-[#8A1D2F]"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+            {navLinks.map((link) => (
+              <div key={link.label} className="relative group">
+                {link.dropdown ? (
+                  <button
+                    onMouseEnter={() => setActiveDropdown(link.label)}
+                    onMouseLeave={() => setActiveDropdown(null)}
+                    className={`px-3 py-2 text-base lg:text-lg font-bold tracking-wide transition-colors inline-flex items-center space-x-2 ${
+                      activeDropdown === link.label
+                        ? "text-[#8A1D2F]"
+                        : "text-gray-700 hover:text-[#8A1D2F]"
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <svg
+                      className={`w-5 h-5 transition-transform ${
+                        activeDropdown === link.label ? "rotate-180" : ""
                       }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      <span>{link.label}</span>
-                      <svg
-                        className={`w-5 h-5 transition-transform ${
-                          activeDropdown === link.label ? "rotate-180" : ""
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                ) : (
+                  <Link
+                    href={link.href!}
+                    className={`px-3 py-2 text-base lg:text-lg font-bold tracking-wide transition-colors ${
+                      pathname === link.href
+                        ? "text-[#8A1D2F]"
+                        : "text-gray-700 hover:text-[#8A1D2F]"
+                    }`}
+                  >
+                    {link.label}
+                    {pathname === link.href && (
+                      <motion.div
+                        layoutId="underline"
+                        className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#8A1D2F]"
+                      />
+                    )}
+                  </Link>
+                )}
+
+                {/* Dropdown Menu */}
+                {link.dropdown && (
+                  <AnimatePresence>
+                    {activeDropdown === link.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-2"
+                        onMouseEnter={() => setActiveDropdown(link.label)}
+                        onMouseLeave={() => setActiveDropdown(null)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                  ) : (
-                    <Link
-                      href={link.href!}
-                      className={`px-3 py-2 text-base lg:text-lg font-bold tracking-wide transition-colors ${
-                        pathname === link.href
-                          ? "text-[#8A1D2F]"
-                          : "text-gray-700 hover:text-[#8A1D2F]"
-                      }`}
-                    >
-                      {link.label}
-                      {pathname === link.href && (
-                        <motion.div
-                          layoutId="underline"
-                          className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#8A1D2F]"
-                        />
-                      )}
-                    </Link>
-                  )}
-
-                  {/* Dropdown Menu */}
-                  {link.dropdown && (
-                    <AnimatePresence>
-                      {activeDropdown === link.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-2"
-                          onMouseEnter={() => setActiveDropdown(link.label)}
-                          onMouseLeave={() => setActiveDropdown(null)}
-                        >
-                          {link.items?.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              className="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#8A1D2F]"
-                            >
-                              {item.name}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg -mr-2"
-            >
-              <div className="w-5 h-4 flex flex-col justify-between">
-                <span
-                  className={`w-full h-0.5 bg-gray-600 transition-transform ${
-                    isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
-                  }`}
-                />
-                <span
-                  className={`w-full h-0.5 bg-gray-600 transition-opacity ${
-                    isMobileMenuOpen ? "opacity-0" : ""
-                  }`}
-                />
-                <span
-                  className={`w-full h-0.5 bg-gray-600 transition-transform ${
-                    isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                  }`}
-                />
+                        {link.items?.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#8A1D2F]"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
               </div>
-            </motion.button>
+            ))}
           </div>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg -mr-2"
+          >
+            <div className="w-5 h-4 flex flex-col justify-between">
+              <span
+                className={`w-full h-0.5 bg-gray-600 transition-transform ${
+                  isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                }`}
+              />
+              <span
+                className={`w-full h-0.5 bg-gray-600 transition-opacity ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`w-full h-0.5 bg-gray-600 transition-transform ${
+                  isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                }`}
+              />
+            </div>
+          </motion.button>
         </div>
-      </motion.nav>
+      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -238,6 +228,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   );
 }
