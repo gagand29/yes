@@ -1,113 +1,243 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import styles from "@/styles/navbar.module.css";
+import { usePathname } from "next/navigation";
+
+const companies = [
+  { name: "YES HardSoft Solutions Inc", href: "/companies/hardsoft" },
+  { name: "YES Trust", href: "/companies/trust" },
+  { name: "YES Auto Needs", href: "/companies/auto" },
+  { name: "YES Finance", href: "/companies/finance" },
+];
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  { name: "Companies", href: "/companies" },
-  { name: "Services", href: "/services" },
-  { name: "FAQs", href: "/faqs" },
-  { name: "Jobs", href: "/jobs" },
-  { name: "Contact", href: "/contact" },
+  { href: "/", label: "Home" },
+  {
+    label: "Companies",
+    dropdown: true,
+    items: companies,
+  },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow">
-      {/* Top Banner */}
-      <div className="bg-[#8A1D2F] text-white text-sm py-2 px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-0">
-        <span>Do something, Lead follow, or get out of the way</span>
-        <div className="flex flex-col md:flex-row gap-1 md:gap-4 text-sm">
-          <a href="tel:+1234567890" className="hover:underline">
-            +1 234 567 890
-          </a>
-          <span className="hidden md:inline">|</span>
-          <a href="mailto:info@yesgroups.com" className="hover:underline">
-            info@yesgroups.com
-          </a>
-        </div>
-      </div>
-
-      {/* Main Nav */}
-      <div className={`${styles.navWrapper} relative`}>
-        {/* Logo */}
-        <Link href="/">
-          <Image
-            src="/home/logo.png"
-            alt="YES Groups Logo"
-            width={100}
-            height={100}
-            priority
-            style={{ width: "auto", height: "auto" }}
-          />
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-[16px] font-medium text-gray-700 hover:text-[#8A1D2F] transition"
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed w-full z-50 transition-all duration-300 bg-white shadow-lg"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center h-16 md:h-20">
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex-shrink-0"
             >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        {/* CTA Button */}
-        <motion.a
-          href="/contact"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="hidden md:inline-block bg-orange-500 text-white text-sm px-4 py-2 rounded-md shadow hover:bg-orange-600 transition"
-        >
-          Get in Touch →
-        </motion.a>
-
-        {/* Mobile Hamburger */}
-        <div className="md:hidden flex items-center gap-2">
-          <button
-            className="text-[#8A1D2F]"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="absolute top-20 left-0 w-full bg-white shadow-md flex flex-col items-center py-4 gap-4 z-50">
-            {navLinks.map((link) => (
               <Link
-                key={link.name}
-                href={link.href}
-                className="text-gray-800 text-base hover:text-[#8A1D2F]"
-                onClick={() => setIsOpen(false)}
+                href="/"
+                className="flex items-center space-x-2 md:space-x-3"
               >
-                {link.name}
+                <Image
+                  src="/home/logoR.png"
+                  alt="YES Groups Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-full w-8 h-8 md:w-10 md:h-10"
+                />
+                <span className="font-bold text-lg md:text-xl text-[#8A1D2F] whitespace-nowrap">
+                  YES Groups
+                </span>
               </Link>
-            ))}
-            <motion.a
-              href="/contact"
-              whileHover={{ scale: 1.05 }}
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              {navLinks.map((link) => (
+                <div key={link.label} className="relative group">
+                  {link.dropdown ? (
+                    <button
+                      onMouseEnter={() => setActiveDropdown(link.label)}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                      className={`px-3 py-2 text-base lg:text-lg font-bold tracking-wide transition-colors inline-flex items-center space-x-2 ${
+                        activeDropdown === link.label
+                          ? "text-[#8A1D2F]"
+                          : "text-gray-700 hover:text-[#8A1D2F]"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <svg
+                        className={`w-5 h-5 transition-transform ${
+                          activeDropdown === link.label ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href!}
+                      className={`px-3 py-2 text-base lg:text-lg font-bold tracking-wide transition-colors ${
+                        pathname === link.href
+                          ? "text-[#8A1D2F]"
+                          : "text-gray-700 hover:text-[#8A1D2F]"
+                      }`}
+                    >
+                      {link.label}
+                      {pathname === link.href && (
+                        <motion.div
+                          layoutId="underline"
+                          className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#8A1D2F]"
+                        />
+                      )}
+                    </Link>
+                  )}
+
+                  {/* Dropdown Menu */}
+                  {link.dropdown && (
+                    <AnimatePresence>
+                      {activeDropdown === link.label && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-2"
+                          onMouseEnter={() => setActiveDropdown(link.label)}
+                          onMouseLeave={() => setActiveDropdown(null)}
+                        >
+                          {link.items?.map((item) => (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              className="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#8A1D2F]"
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
               whileTap={{ scale: 0.95 }}
-              className="bg-orange-500 text-white text-sm px-4 py-2 rounded-md shadow hover:bg-orange-600 transition"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg -mr-2"
             >
-              Get in Touch →
-            </motion.a>
+              <div className="w-5 h-4 flex flex-col justify-between">
+                <span
+                  className={`w-full h-0.5 bg-gray-600 transition-transform ${
+                    isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                  }`}
+                />
+                <span
+                  className={`w-full h-0.5 bg-gray-600 transition-opacity ${
+                    isMobileMenuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`w-full h-0.5 bg-gray-600 transition-transform ${
+                    isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                  }`}
+                />
+              </div>
+            </motion.button>
           </div>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 md:hidden pt-16"
+          >
+            <div
+              className="absolute inset-0 bg-black/20"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="absolute right-0 top-0 bottom-0 w-64 bg-white shadow-xl"
+            >
+              <div className="p-5 pt-6 space-y-3">
+                {navLinks.map((link) =>
+                  link.dropdown ? (
+                    <div key={link.label} className="space-y-2">
+                      <h3 className="text-sm font-semibold text-gray-400 px-2">
+                        {link.label}
+                      </h3>
+                      {link.items?.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block py-2 px-2 text-sm font-medium text-gray-600 hover:text-[#8A1D2F]"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      href={link.href!}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block py-2 px-2 text-sm font-bold ${
+                        pathname === link.href
+                          ? "text-[#8A1D2F]"
+                          : "text-gray-600 hover:text-[#8A1D2F]"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
         )}
-      </div>
-    </header>
+      </AnimatePresence>
+    </>
   );
 }
