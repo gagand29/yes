@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import styles from "@/styles/clients.module.css";
 
 const clients = [
   "/home/clients/jpmorgan.png",
@@ -54,8 +53,8 @@ export default function ClientsCarousel() {
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-50 to-transparent z-10" />
 
           {/* Scroller Container */}
-          <div className={styles.marquee}>
-            <div className={styles.marqueeGroup} ref={primaryRef}>
+          <div className="marquee">
+            <div className="marqueeGroup" ref={primaryRef}>
               {clients.map((src, i) => (
                 <div
                   key={i}
@@ -74,7 +73,7 @@ export default function ClientsCarousel() {
                 </div>
               ))}
             </div>
-            <div className={styles.marqueeGroup} ref={secondaryRef}></div>
+            <div className="marqueeGroup" ref={secondaryRef}></div>
           </div>
         </div>
       </div>

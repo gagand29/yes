@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import styles from "@/styles/contact.module.css";
 
 const usaOfficeImages = [
   {
@@ -128,7 +127,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className={styles.formContainer}
+            className="space-y-6"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -142,7 +141,7 @@ export default function ContactPage() {
                   type="text"
                   id="name"
                   required
-                  className={styles.input}
+                  className="border border-gray-300 rounded-md p-2"
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
@@ -160,7 +159,7 @@ export default function ContactPage() {
                   type="email"
                   id="email"
                   required
-                  className={styles.input}
+                  className="border border-gray-300 rounded-md p-2"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -177,7 +176,7 @@ export default function ContactPage() {
                 <input
                   type="tel"
                   id="phone"
-                  className={styles.input}
+                  className="border border-gray-300 rounded-md p-2"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
@@ -194,7 +193,7 @@ export default function ContactPage() {
                 <select
                   id="department"
                   required
-                  className={styles.select}
+                  className="border border-gray-300 rounded-md p-2"
                   value={formData.department}
                   onChange={(e) =>
                     setFormData({ ...formData, department: e.target.value })
@@ -219,14 +218,17 @@ export default function ContactPage() {
                   id="message"
                   required
                   rows={4}
-                  className={styles.textarea}
+                  className="border border-gray-300 rounded-md p-2"
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
                 />
               </div>
-              <button type="submit" className={styles.submitButton}>
+              <button
+                type="submit"
+                className="bg-[#8A1D2F] text-white rounded-md px-4 py-2"
+              >
                 Send Message
               </button>
             </form>
