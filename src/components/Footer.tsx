@@ -75,7 +75,7 @@ export default function Footer() {
                 <span>📧</span>
                 <a
                   href="mailto:info@yesgroups.com"
-                  className="hover:text-white transition-colors"
+                  className="!text-white"
                 >
                   info@yesgroups.com
                 </a>
@@ -84,7 +84,7 @@ export default function Footer() {
                 <span>📱</span>
                 <a
                   href="tel:+1234567890"
-                  className="hover:text-white transition-colors"
+                  className="!text-white"
                 >
                   +1 234 567 890
                 </a>
@@ -108,7 +108,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-gray-200 hover:text-white transition-colors inline-block"
+                      className="!text-gray-200 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -126,7 +126,7 @@ export default function Footer() {
                 <li key={company.href}>
                   <Link
                     href={company.href}
-                    className="text-gray-200 hover:text-white transition-colors"
+                    className="!text-gray-200"
                   >
                     {company.label}
                   </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+16096320397"
-                  className="flex items-center space-x-3 hover:text-white transition-colors"
+                  className="flex items-center space-x-3 !text-white"
                 >
                   <FaPhone />
                   <span>(001)-609-632-0397</span>
@@ -161,7 +161,7 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:info@yesgroups.net"
-                  className="flex items-center space-x-3 hover:text-white transition-colors"
+                  className="flex items-center space-x-3 !text-white"
                 >
                   <FaEnvelope />
                   <span>info@yesgroups.net</span>
@@ -187,14 +187,14 @@ export default function Footer() {
             <div className="flex items-center gap-4 text-sm text-gray-200">
               <Link
                 href="/privacy"
-                className="hover:text-white transition-colors"
+                className="!text-white"
               >
                 Privacy Policy
               </Link>
               <span>•</span>
               <Link
                 href="/terms"
-                className="hover:text-white transition-colors"
+                className="!text-white"
               >
                 Terms of Service
               </Link>

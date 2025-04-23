@@ -37,7 +37,7 @@ export default function AboutPage() {
           </div>
           <div className="md:w-1/2">
             <p className="text-gray-700 text-lg leading-relaxed">
-              YES Groups, a brainchild of Mr. Deepak Budaguppe, was started in
+              YES Groups, a brainchild of <strong>Mr. Deepak Budaguppe</strong>, was started in
               1998 with the intention of serving society and making it better in
               all aspects. It was formed with the help of his close associates
               like Mr. Deepak M. and Mr. Jagadeesh G.N., and officially
