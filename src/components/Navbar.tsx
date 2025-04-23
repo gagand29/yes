@@ -55,9 +55,9 @@ export default function Navbar() {
                 alt="YES Groups Logo"
                 width={40}
                 height={40}
-                className="rounded-full w-8 h-8 md:w-10 md:h-10"
+                className="rounded-full w-10 h-10 md:w-14 md:h-14"
               />
-              <span className="font-bold text-lg md:text-xl text-[#8A1D2F] whitespace-nowrap">
+              <span className="font-bold text-xl md:text-2xl lg:text-3xl text-[#8A1D2F] whitespace-nowrap">
                 YES Groups
               </span>
             </Link>
