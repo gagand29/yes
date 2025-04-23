@@ -1,28 +1,15 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../styles/globals.css";
+import { Inter } from "next/font/google";
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 // ✅ Set tab title and description
-export const metadata: Metadata = {
+export const metadata = {
   title: "YES Groups",
-  description:
-    "Youth Effort for Society — Trusted partner in business excellence",
-  icons: {
-    icon: "/favicon.ico",
-  },
+  description: "YES Groups - Empowering Businesses and Communities",
 };
 
 export default function RootLayout({
@@ -32,9 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <TopBar />
           <Navbar />
